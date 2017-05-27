@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <script>
+    // Use the They Said So API https://theysaidso.com/api/
+    const quoteSource = 'http://quotes.rest/qod.json?category=inspire';
+
+    function setText(quote, author) {
+    	let quoteDiv = document.getElementById('quote');
+    	let authorDiv = document.getElementById('author');
+    	quoteDiv.innerText = quote;
+    	authorDiv.innerText = author;
+    	return true;
+    }
+
+    fetch('https://quotes.rest/qod.json?category=inspire', { mode: 'cors' })
+    	.then(res => res.json())
+    	.then(data => setText(
+    		data.contents.quotes[0].quote,
+    		data.contents.quotes[0].author
+    	));
+    </script>
+    
+    <style type="text/css">
+      p#author {
+          text-align: right;
+          font-size: .6em;
+          font-style: normal;
+          opacity: .6;
+      }
+
+      div#fancyquotebox {
+          font-size: 2.3em;
+          padding: 0em 1em;
+          font-style: italic;
+          opacity: 0.75;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id = "fancyquotebox">
+      <p id = "quote">Quote Loading...</p>
+      <p id = "author">Author Loading...</p>
+    </div>
+  </body>
+</html>
